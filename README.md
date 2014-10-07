@@ -1,60 +1,38 @@
 NCSS
 ====
 
-> NCSS is a paper about naming conventions and best practices for **object oriented** and **atomic design** powered CSS.
+> NCSS is a paper about naming conventions and best practices for **object oriented** and **atomic design** CSS.
 
 
 Why
 ---
 
-Massive CSS on large scaled websites used to cause following issues:
+Massive CSS on **larger projects** used to cause issues:
 
-- Multiple editors without a uniform concept
-- Missing context to the website's layout and HTML structure
+- Teamwork without uniform conventions
+- Missing context to the project's layout and structure
+- Big ball of mud instead of modularization
 - Lack of inline documentation
 
 
 Getting started
 ---------------
 
+There is no specification the use **hyphen**, **underscore** or **camelcase** for your classnames - it is upon your personal preference, but we recommended to use the language's native hyphen style.
+
 Named Cascading Style Sheets are divided into:
 
-- [Namespace classes](#namespace-classes)
 - [Structural classes](#structural-classes)
 - [Type classes](#type-classes)
 - [Modifier classes](#modifier-classes)
 - [Functional classes](#functional-classes)
-
-There is no specification the use **hyphen**, **underscore** or **camelcase** for class names!
-
-
-Namespace classes
------------------
-
-Syntax: <code>.namespace</code>
-
-<table>
-	<thead>
-		<tr>
-			<th>Prefix</th>
-			<th>Tags</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td>foo-</td>
-			<td>*</td>
-		</tr>
-	</tbody>
-</table>
-
-<strong>Hint:</strong>
-
-Consider to pick a namespace if you provide your CSS to a third party application.
+- [Namespace classes](#namespace-classes)
 
 
 Structural classes
 ------------------
+
+Layout and structural classes provide a semantic context for underlaying elements. Classnames are **stand-alone** and should never contain a **prefix** or **suffix** extention.
 
 Syntax: <code>.context</code>
 
@@ -68,27 +46,31 @@ Syntax: <code>.context</code>
 	<tbody>
 		<tr>
 			<td>.content</td>
-			<td>article, div</td>
+			<td>article</td>
 		</tr>
 		<tr>
 			<td>.footer</td>
-			<td>div, footer</td>
+			<td>footer</td>
 		</tr>
 		<tr>
 			<td>.header</td>
-			<td>div, header</td>
+			<td>header</td>
 		</tr>
 		<tr>
 			<td>.navigation</td>
-			<td>div, nav</td>
+			<td>nav</td>
 		</tr>
 		<tr>
 			<td>.section</td>
-			<td>div, section</td>
+			<td>section</td>
 		</tr>
 		<tr>
 			<td>.sidebar</td>
-			<td>div, aside</td>
+			<td>side</td>
+		</tr>
+		<tr>
+			<td>.main</td>
+			<td>div</td>
 		</tr>
 		<tr>
 			<td>.wrapper</td>
@@ -97,13 +79,11 @@ Syntax: <code>.context</code>
 	</tbody>
 </table>
 
-<strong>Hint:</strong>
-
-Layout and structural classes should never contain a type prefix or modifier suffix.
-
 
 Type classes
 ------------
+
+Type classes are the foundation to write **re-usable**, **modular** and **semantic** CSS - tell the reader what kind of elements, tags and sections are affected. Keep in mind that structural tags are rather unsuitable to contain a **type** prefix.
 
 Syntax: <code>.type</code> and <code>.type-context</code>
 
@@ -118,7 +98,7 @@ Syntax: <code>.type</code> and <code>.type-context</code>
 	<tbody>
 		<tr>
 			<td>box-</td>
-			<td>blockquote, div, span</td>
+			<td>blockquote, div</td>
 			<td>.box-content</td>
 		</tr>
 		<tr>
@@ -179,30 +159,15 @@ Syntax: <code>.type</code> and <code>.type-context</code>
 	</tbody>
 </table>
 
-<strong>Hint:</strong>
-
-Structural tags are rather unsuitable to contain a type prefix:
-
-- article
-- aside
-- footer
-- header
-- nav
-- section
-
 
 Modifier classes
 ----------------
 
-Extend with additional description:
-
-Syntax: <code>.type-description</code> and <code>.type-context-description</code>
-
-Extend with current state:
+There are no limitation to extend your **type classes** with individual **state**, **description** and **position** modifier. Proper handling of **context** and **type** should prevent the need of adjoining classes.
 
 Syntax: <code>.type-state</code> and <code>.type-context-state</code>
 
-Extend with position information:
+Syntax: <code>.type-description</code> and <code>.type-context-description</code>
 
 Syntax: <code>.type-position</code> and <code>.type-context-position</code>
 
@@ -216,20 +181,7 @@ Syntax: <code>.type-position</code> and <code>.type-context-position</code>
 	</thead>
 	<tbody>
 		<tr>
-			<td colspan="3">Additional description</td>
-		</tr>
-		<tr>
-			<td>-small</td>
-			<td>*</td>
-			<td>.item-small</td>
-		</tr>
-		<tr>
-			<td>-large</td>
-			<td>*</td>
-			<td>.item-large</td>
-		</tr>
-		<tr>
-			<td colspan="3">Current state</td>
+			<td colspan="3">State</td>
 		</tr>
 		<tr>
 			<td>-active</td>
@@ -252,7 +204,20 @@ Syntax: <code>.type-position</code> and <code>.type-context-position</code>
 			<td>.item-touch</td>
 		</tr>
 		<tr>
-			<td colspan="3">Position information</td>
+			<td colspan="3">Description</td>
+		</tr>
+		<tr>
+			<td>-small</td>
+			<td>*</td>
+			<td>.item-small</td>
+		</tr>
+		<tr>
+			<td>-large</td>
+			<td>*</td>
+			<td>.item-large</td>
+		</tr>
+		<tr>
+			<td colspan="3">Position</td>
 		</tr>
 		<tr>
 			<td>-first</td>
@@ -287,19 +252,13 @@ Syntax: <code>.type-position</code> and <code>.type-context-position</code>
 	</tbody>
 </table>
 
-<strong>Hint:</strong>
-
-Proper handling of type and context should prevent the need of adjoining classes.
-
 
 Functional classes
 ------------------
 
-Pure functional classes, marked with the <code>has</code> prefix.
+Functional classes using **pure CSS** are marked with the <code>has</code> and <code>fn</code> prefix. **Javascript enhanced** and therefore **re-usable** classes on the other hand can be identified by the <code>js</code> prefix. Both should never have styles for painting, use an additional **type** class for this purpose.
 
-Syntax: <code>.has-action</code> or <code>.has-context</code>
-
-Javascript related classes marked with the <code>js</code> prefix.
+Syntax: <code>.has-action</code> or <code>.fn-action</code>
 
 Syntax: <code>.js-action</code> or <code>.js-context</code>
 
@@ -318,6 +277,11 @@ Syntax: <code>.js-action</code> or <code>.js-context</code>
 			<td>.has-tooltip</td>
 		</tr>
 		<tr>
+			<td>fn-</td>
+			<td>*</td>
+			<td>.fn-more</td>
+		</tr>
+		<tr>
 			<td>js-</td>
 			<td>*</td>
 			<td>.js-click</td>
@@ -325,21 +289,40 @@ Syntax: <code>.js-action</code> or <code>.js-context</code>
 	</tbody>
 </table>
 
-<strong>Hint:</strong>
 
-Functional classes should never have declarations for styling.
+Namespace classes
+-----------------
+
+Consider to pick a unique namespace once you provide a framework to third party applications or generally want to prevent naming conflicts inside your project.
+
+Syntax: <code>.namespace</code>
+
+<table>
+	<thead>
+		<tr>
+			<th>Prefix</th>
+			<th>Tags</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>foo-</td>
+			<td>*</td>
+		</tr>
+	</tbody>
+</table>
 
 
 Example
 -------
 
-A class <code>.foo-box-content</code> provides the information of a styled <code>div</code> tag located inside a structural <code>.foo-content</code> container. I picked a fake namespace <code>foo-</code> from a foobar framework.
+A class <code>.foo-box-content</code> provides the information of a styled <code>div</code> tag located inside a structural <code>.foo-content</code> container. I picked the namespace <code>foo</code> from an conceived framework called foobar.
 
 
 HTML:
 
 <pre>
-&lt;div class="foo-wrapper"&gt;
+&lt;div class="foo-main foo-wrapper"&gt;
 
 	&lt;div id="content" class="foo-content"&gt;
 		&lt;h1 class="foo-title foo-title-content"&gt;Headline&lt;/h1&gt;
@@ -363,7 +346,14 @@ HTML:
 CSS:
 
 <pre>
-/* boxes */
+/**
+ * @tableofcontents
+ *
+ * 1. boxes
+ * 2. titles
+ */
+
+/* @section 1. boxes */
 
 .foo-box
 {
@@ -383,7 +373,7 @@ CSS:
 	width: 20%;
 }
 
-/* titles */
+/* @section 2. titles */
 
 .foo-title
 {
@@ -405,14 +395,8 @@ CSS:
 Conclusion
 ----------
 
-The goal of NCSS is to provide **additional information** by reading unknown CSS declaration.
+The goal of NCSS is to provide **semantic information** by reading other's people CSS.
 
-- What elements, tags and sections are affected
-- What is the relation of one CSS class to another
-- Where to add related CSS declarations
-
-
-Thanks
-------
-
-[Ronny Springer](https://github.com/ronny-springer) for contribution
+- What kind of elements, tags and sections are affected
+- What is the relation and inheritance of one class to another
+- Where is the most accurate place to add new declarations
